@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="62de053f91ba47c6ae993b066a28d246" Name="Diagram1">
+        <EntityTypeShape EntityType="DAL.Accessright" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Accessright_Right" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Account" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Account_Information" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Account_Information_Generic" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Account_Information_Generic_Value" Width="1.5" PointX="8.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Account_Session" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.AccountAccess" Width="1.5" PointX="8.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Club" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.ClubLinkModule" Width="1.5" PointX="3" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Contact" Width="1.5" PointX="3" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.GenericFile" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Grade" Width="1.5" PointX="3" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Image" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.LoginLog" Width="1.5" PointX="8.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Module" Width="1.5" PointX="0.75" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.ModuleLink" Width="1.5" PointX="8" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Movie" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Search" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.TECHNICS" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="DAL.Accessright__AccountAccess" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Accessrig__Acces__7A521F79" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Accessrig__Acces__7B4643B2" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Accessrig__ClubI__7869D707" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Accessrig__ClubI__795DFB40" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.Account__AccountAccess" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account__ClubId__000AF8CF" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account__ClubId__00FF1D08" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account__ClubId__7C3A67EB" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account__ClubId__7D2E8C24" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account__ClubId__7E22B05D" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account__ClubId__7F16D496" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account_I__Accou__03DB89B3" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account_I__Accou__05C3D225" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account_I__Accou__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account_S__Accou__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__LoginLog__UserId__3D14070F" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account_I__Accou__02E7657A" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Account_I__Accou__04CFADEC" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__ClubLinkM__ClubI__0A888742" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__ClubLinkM__ClubI__0B7CAB7B" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Contact__ClubId__1F83A428" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Contact__ClubId__2077C861" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Grade__ClubId__2FBA0BF1" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__LoginLog__ClubId__3C1FE2D6" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__ModuleLin__Speci__3FF073BA" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__ModuleLin__Speci__40E497F3" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__ClubLinkM__Modul__0C70CFB4" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__ClubLinkM__Modul__0D64F3ED" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.Tec__Img" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__ModuleLin__Modul__3E082B48" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__ModuleLin__Modul__3EFC4F81" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.Tec__Movie" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DAL.GenericItemPermission" Width="1.5" PointX="8.25" PointY="9.375" />
+        <AssociationConnector Association="DAL.FK__GenericIt__Acces__086B34A6" />
+        <AssociationConnector Association="DAL.FK__GenericIt__Accou__095F58DF" />
+        <AssociationConnector Association="DAL.FK__GenericIt__ClubI__0777106D" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

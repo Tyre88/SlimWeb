@@ -1,0 +1,929 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DAL.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Settings" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="IsExternal" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MultipleSubmits" Type="bit" Nullable="false" />
+          <Property Name="SendThanksMail" Type="bit" Nullable="false" />
+          <Property Name="EmailFieldName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="EmailHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EnableExcelImport" Type="bit" Nullable="false" />
+          <Property Name="ExampleExcelPath" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Form_Emails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormExternalSubmitValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="FormFieldId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Batch" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormFields">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormId" Type="int" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsRequired" Type="bit" Nullable="false" />
+          <Property Name="CanMultiply" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormFieldsOptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormFieldId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="FormSubmitValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="FormId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="FormFieldId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Account__ClubId__7F16D496">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Form__ClubId__216BEC9A">
+          <End Role="Club" Type="Self.Club" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Form" Type="Self.Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Form">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Form__CreatedByU__226010D3">
+          <End Role="Account" Type="Self.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Form" Type="Self.Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Form">
+              <PropertyRef Name="CreatedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Form_Emai__FormI__2354350C">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="Form_Emails" Type="Self.Form_Emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Form_Emails">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Form_Emai__FormI__24485945">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="Form_Emails" Type="Self.Form_Emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Form_Emails">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormExter__FormF__253C7D7E">
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormExternalSubmitValues" Type="Self.FormExternalSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFields">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormExternalSubmitValues">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormExter__FormI__2630A1B7">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="FormExternalSubmitValues" Type="Self.FormExternalSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormExternalSubmitValues">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormExter__FormI__2724C5F0">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="FormExternalSubmitValues" Type="Self.FormExternalSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormExternalSubmitValues">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormField__FormF__290D0E62">
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormFieldsOptions" Type="Self.FormFieldsOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFields">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormFieldsOptions">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormField__FormI__2818EA29">
+          <End Role="Form" Type="Self.Form" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormFields">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__ClubI__2A01329B">
+          <End Role="Club" Type="Self.Club" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__FormF__2AF556D4">
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="1" />
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFields">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__FormF__2BE97B0D">
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="1" />
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFields">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__FormI__2CDD9F46">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__FormI__2DD1C37F">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__UserI__2EC5E7B8">
+          <End Role="Account" Type="Self.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DALStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form" EntityType="Self.Form" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form_Emails" EntityType="Self.Form_Emails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormExternalSubmitValues" EntityType="Self.FormExternalSubmitValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormFields" EntityType="Self.FormFields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormFieldsOptions" EntityType="Self.FormFieldsOptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormSubmitValues" EntityType="Self.FormSubmitValues" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account__ClubId__7F16D496" Association="Self.FK__Account__ClubId__7F16D496">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Form__ClubId__216BEC9A" Association="Self.FK__Form__ClubId__216BEC9A">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Form" EntitySet="Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Form__CreatedByU__226010D3" Association="Self.FK__Form__CreatedByU__226010D3">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Form" EntitySet="Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Form_Emai__FormI__2354350C" Association="Self.FK__Form_Emai__FormI__2354350C">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="Form_Emails" EntitySet="Form_Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Form_Emai__FormI__24485945" Association="Self.FK__Form_Emai__FormI__24485945">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="Form_Emails" EntitySet="Form_Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormExter__FormF__253C7D7E" Association="Self.FK__FormExter__FormF__253C7D7E">
+            <End Role="FormFields" EntitySet="FormFields" />
+            <End Role="FormExternalSubmitValues" EntitySet="FormExternalSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormExter__FormI__2630A1B7" Association="Self.FK__FormExter__FormI__2630A1B7">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormExternalSubmitValues" EntitySet="FormExternalSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormExter__FormI__2724C5F0" Association="Self.FK__FormExter__FormI__2724C5F0">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormExternalSubmitValues" EntitySet="FormExternalSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormField__FormF__290D0E62" Association="Self.FK__FormField__FormF__290D0E62">
+            <End Role="FormFields" EntitySet="FormFields" />
+            <End Role="FormFieldsOptions" EntitySet="FormFieldsOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormField__FormI__2818EA29" Association="Self.FK__FormField__FormI__2818EA29">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormFields" EntitySet="FormFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__ClubI__2A01329B" Association="Self.FK__FormSubmi__ClubI__2A01329B">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__FormF__2AF556D4" Association="Self.FK__FormSubmi__FormF__2AF556D4">
+            <End Role="FormFields" EntitySet="FormFields" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__FormF__2BE97B0D" Association="Self.FK__FormSubmi__FormF__2BE97B0D">
+            <End Role="FormFields" EntitySet="FormFields" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__FormI__2CDD9F46" Association="Self.FK__FormSubmi__FormI__2CDD9F46">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__FormI__2DD1C37F" Association="Self.FK__FormSubmi__FormI__2DD1C37F">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__UserI__2EC5E7B8" Association="Self.FK__FormSubmi__UserI__2EC5E7B8">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DAL" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsExternal" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Form_Emails" Relationship="Self.FK__Form_Emai__FormI__2354350C" FromRole="Form" ToRole="Form_Emails" />
+          <NavigationProperty Name="Form_Emails1" Relationship="Self.FK__Form_Emai__FormI__24485945" FromRole="Form" ToRole="Form_Emails" />
+          <NavigationProperty Name="FormExternalSubmitValues" Relationship="Self.FK__FormExter__FormI__2630A1B7" FromRole="Form" ToRole="FormExternalSubmitValues" />
+          <NavigationProperty Name="FormExternalSubmitValues1" Relationship="Self.FK__FormExter__FormI__2724C5F0" FromRole="Form" ToRole="FormExternalSubmitValues" />
+          <NavigationProperty Name="FormFields" Relationship="Self.FK__FormField__FormI__2818EA29" FromRole="Form" ToRole="FormFields" />
+          <NavigationProperty Name="FormSubmitValues" Relationship="Self.FK__FormSubmi__FormI__2CDD9F46" FromRole="Form" ToRole="FormSubmitValues" />
+          <NavigationProperty Name="FormSubmitValues1" Relationship="Self.FK__FormSubmi__FormI__2DD1C37F" FromRole="Form" ToRole="FormSubmitValues" />
+          <NavigationProperty Name="Account" Relationship="DAL.FK__Form__CreatedByU__226010D3" FromRole="Form" ToRole="Account" />
+          <NavigationProperty Name="Club" Relationship="DAL.FK__Form__ClubId__216BEC9A" FromRole="Form" ToRole="Club" />
+          <Property Name="MultipleSubmits" Type="Boolean" Nullable="false" />
+          <Property Name="SendThanksMail" Type="Boolean" Nullable="false" />
+          <Property Name="EmailFieldName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmailHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EnableExcelImport" Type="Boolean" Nullable="false" />
+          <Property Name="ExampleExcelPath" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Form_Emails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Form" Relationship="Self.FK__Form_Emai__FormI__2354350C" FromRole="Form_Emails" ToRole="Form" />
+          <NavigationProperty Name="Form1" Relationship="Self.FK__Form_Emai__FormI__24485945" FromRole="Form_Emails" ToRole="Form" />
+        </EntityType>
+        <EntityType Name="FormExternalSubmitValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FormFieldId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Batch" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Form" Relationship="Self.FK__FormExter__FormI__2630A1B7" FromRole="FormExternalSubmitValues" ToRole="Form" />
+          <NavigationProperty Name="Form1" Relationship="Self.FK__FormExter__FormI__2724C5F0" FromRole="FormExternalSubmitValues" ToRole="Form" />
+          <NavigationProperty Name="FormFields" Relationship="Self.FK__FormExter__FormF__253C7D7E" FromRole="FormExternalSubmitValues" ToRole="FormFields" />
+        </EntityType>
+        <EntityType Name="FormFields">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Label" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsRequired" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Form" Relationship="Self.FK__FormField__FormI__2818EA29" FromRole="FormFields" ToRole="Form" />
+          <NavigationProperty Name="FormExternalSubmitValues" Relationship="Self.FK__FormExter__FormF__253C7D7E" FromRole="FormFields" ToRole="FormExternalSubmitValues" />
+          <NavigationProperty Name="FormFieldsOptions" Relationship="Self.FK__FormField__FormF__290D0E62" FromRole="FormFields" ToRole="FormFieldsOptions" />
+          <NavigationProperty Name="FormSubmitValues" Relationship="Self.FK__FormSubmi__FormF__2AF556D4" FromRole="FormFields" ToRole="FormSubmitValues" />
+          <NavigationProperty Name="FormSubmitValues1" Relationship="Self.FK__FormSubmi__FormF__2BE97B0D" FromRole="FormFields" ToRole="FormSubmitValues" />
+          <Property Name="CanMultiply" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormFieldsOptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormFieldId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FormFields" Relationship="Self.FK__FormField__FormF__290D0E62" FromRole="FormFieldsOptions" ToRole="FormFields" />
+        </EntityType>
+        <EntityType Name="FormSubmitValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FormFieldId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Form" Relationship="Self.FK__FormSubmi__FormI__2CDD9F46" FromRole="FormSubmitValues" ToRole="Form" />
+          <NavigationProperty Name="Form1" Relationship="Self.FK__FormSubmi__FormI__2DD1C37F" FromRole="FormSubmitValues" ToRole="Form" />
+          <NavigationProperty Name="FormFields" Relationship="Self.FK__FormSubmi__FormF__2AF556D4" FromRole="FormSubmitValues" ToRole="FormFields" />
+          <NavigationProperty Name="FormFields1" Relationship="Self.FK__FormSubmi__FormF__2BE97B0D" FromRole="FormSubmitValues" ToRole="FormFields" />
+          <NavigationProperty Name="Account" Relationship="DAL.FK__FormSubmi__UserI__2EC5E7B8" FromRole="FormSubmitValues" ToRole="Account" />
+          <NavigationProperty Name="Club" Relationship="DAL.FK__FormSubmi__ClubI__2A01329B" FromRole="FormSubmitValues" ToRole="Club" />
+        </EntityType>
+        <Association Name="FK__Form_Emai__FormI__2354350C">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="Form_Emails" Type="Self.Form_Emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Form_Emails">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Form_Emai__FormI__24485945">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="Form_Emails" Type="Self.Form_Emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Form_Emails">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormExter__FormI__2630A1B7">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="FormExternalSubmitValues" Type="Self.FormExternalSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormExternalSubmitValues">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormExter__FormI__2724C5F0">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="FormExternalSubmitValues" Type="Self.FormExternalSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormExternalSubmitValues">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormField__FormI__2818EA29">
+          <End Role="Form" Type="Self.Form" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormFields">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__FormI__2CDD9F46">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__FormI__2DD1C37F">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormExter__FormF__253C7D7E">
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormExternalSubmitValues" Type="Self.FormExternalSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFields">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormExternalSubmitValues">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormField__FormF__290D0E62">
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormFieldsOptions" Type="Self.FormFieldsOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFields">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormFieldsOptions">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__FormF__2AF556D4">
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="1" />
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFields">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__FormF__2BE97B0D">
+          <End Role="FormFields" Type="Self.FormFields" Multiplicity="1" />
+          <End Role="FormSubmitValues" Type="Self.FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFields">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FormsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Form" EntityType="Self.Form" />
+          <EntitySet Name="Form_Emails" EntityType="Self.Form_Emails" />
+          <EntitySet Name="FormExternalSubmitValues" EntityType="Self.FormExternalSubmitValues" />
+          <EntitySet Name="FormFields" EntityType="Self.FormFields" />
+          <EntitySet Name="FormFieldsOptions" EntityType="Self.FormFieldsOptions" />
+          <EntitySet Name="FormSubmitValues" EntityType="Self.FormSubmitValues" />
+          <AssociationSet Name="FK__Form_Emai__FormI__2354350C" Association="Self.FK__Form_Emai__FormI__2354350C">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="Form_Emails" EntitySet="Form_Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Form_Emai__FormI__24485945" Association="Self.FK__Form_Emai__FormI__24485945">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="Form_Emails" EntitySet="Form_Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormExter__FormI__2630A1B7" Association="Self.FK__FormExter__FormI__2630A1B7">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormExternalSubmitValues" EntitySet="FormExternalSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormExter__FormI__2724C5F0" Association="Self.FK__FormExter__FormI__2724C5F0">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormExternalSubmitValues" EntitySet="FormExternalSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormField__FormI__2818EA29" Association="Self.FK__FormField__FormI__2818EA29">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormFields" EntitySet="FormFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__FormI__2CDD9F46" Association="Self.FK__FormSubmi__FormI__2CDD9F46">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__FormI__2DD1C37F" Association="Self.FK__FormSubmi__FormI__2DD1C37F">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormExter__FormF__253C7D7E" Association="Self.FK__FormExter__FormF__253C7D7E">
+            <End Role="FormFields" EntitySet="FormFields" />
+            <End Role="FormExternalSubmitValues" EntitySet="FormExternalSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormField__FormF__290D0E62" Association="Self.FK__FormField__FormF__290D0E62">
+            <End Role="FormFields" EntitySet="FormFields" />
+            <End Role="FormFieldsOptions" EntitySet="FormFieldsOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__FormF__2AF556D4" Association="Self.FK__FormSubmi__FormF__2AF556D4">
+            <End Role="FormFields" EntitySet="FormFields" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__FormF__2BE97B0D" Association="Self.FK__FormSubmi__FormF__2BE97B0D">
+            <End Role="FormFields" EntitySet="FormFields" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <EntitySet Name="Account" EntityType="DAL.Account" />
+          <EntitySet Name="Club" EntityType="DAL.Club" />
+          <AssociationSet Name="FK__Account__ClubId__7F16D496" Association="DAL.FK__Account__ClubId__7F16D496">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Form__CreatedByU__226010D3" Association="DAL.FK__Form__CreatedByU__226010D3">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Form" EntitySet="Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__UserI__2EC5E7B8" Association="DAL.FK__FormSubmi__UserI__2EC5E7B8">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Form__ClubId__216BEC9A" Association="DAL.FK__Form__ClubId__216BEC9A">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Form" EntitySet="Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FormSubmi__ClubI__2A01329B" Association="DAL.FK__FormSubmi__ClubI__2A01329B">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="FormSubmitValues" EntitySet="FormSubmitValues" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Club" Relationship="DAL.FK__Account__ClubId__7F16D496" FromRole="Account" ToRole="Club" />
+          <NavigationProperty Name="Form" Relationship="DAL.FK__Form__CreatedByU__226010D3" FromRole="Account" ToRole="Form" />
+          <NavigationProperty Name="FormSubmitValues" Relationship="DAL.FK__FormSubmi__UserI__2EC5E7B8" FromRole="Account" ToRole="FormSubmitValues" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Settings" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="DAL.FK__Account__ClubId__7F16D496" FromRole="Club" ToRole="Account" />
+          <NavigationProperty Name="Form" Relationship="DAL.FK__Form__ClubId__216BEC9A" FromRole="Club" ToRole="Form" />
+          <NavigationProperty Name="FormSubmitValues" Relationship="DAL.FK__FormSubmi__ClubI__2A01329B" FromRole="Club" ToRole="FormSubmitValues" />
+        </EntityType>
+        <Association Name="FK__Account__ClubId__7F16D496">
+          <End Type="DAL.Club" Role="Club" Multiplicity="1" />
+          <End Type="DAL.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Form__CreatedByU__226010D3">
+          <End Type="DAL.Account" Role="Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DAL.Form" Role="Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Form">
+              <PropertyRef Name="CreatedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__UserI__2EC5E7B8">
+          <End Type="DAL.Account" Role="Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DAL.FormSubmitValues" Role="FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Form__ClubId__216BEC9A">
+          <End Type="DAL.Club" Role="Club" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DAL.Form" Role="Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Form">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FormSubmi__ClubI__2A01329B">
+          <End Type="DAL.Club" Role="Club" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DAL.FormSubmitValues" Role="FormSubmitValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormSubmitValues">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DALStoreContainer" CdmEntityContainer="FormsEntities">
+          <EntitySetMapping Name="Form">
+            <EntityTypeMapping TypeName="DAL.Form">
+              <MappingFragment StoreEntitySet="Form">
+                <ScalarProperty Name="ExampleExcelPath" ColumnName="ExampleExcelPath" />
+                <ScalarProperty Name="EnableExcelImport" ColumnName="EnableExcelImport" />
+                <ScalarProperty Name="EmailHtml" ColumnName="EmailHtml" />
+                <ScalarProperty Name="EmailFieldName" ColumnName="EmailFieldName" />
+                <ScalarProperty Name="SendThanksMail" ColumnName="SendThanksMail" />
+                <ScalarProperty Name="MultipleSubmits" ColumnName="MultipleSubmits" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="IsExternal" ColumnName="IsExternal" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form_Emails">
+            <EntityTypeMapping TypeName="DAL.Form_Emails">
+              <MappingFragment StoreEntitySet="Form_Emails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormExternalSubmitValues">
+            <EntityTypeMapping TypeName="DAL.FormExternalSubmitValues">
+              <MappingFragment StoreEntitySet="FormExternalSubmitValues">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="FormFieldId" ColumnName="FormFieldId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormFields">
+            <EntityTypeMapping TypeName="DAL.FormFields">
+              <MappingFragment StoreEntitySet="FormFields">
+                <ScalarProperty Name="CanMultiply" ColumnName="CanMultiply" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormFieldsOptions">
+            <EntityTypeMapping TypeName="DAL.FormFieldsOptions">
+              <MappingFragment StoreEntitySet="FormFieldsOptions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormFieldId" ColumnName="FormFieldId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormSubmitValues">
+            <EntityTypeMapping TypeName="DAL.FormSubmitValues">
+              <MappingFragment StoreEntitySet="FormSubmitValues">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="FormFieldId" ColumnName="FormFieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="DAL.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Club">
+            <EntityTypeMapping TypeName="DAL.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Settings" ColumnName="Settings" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

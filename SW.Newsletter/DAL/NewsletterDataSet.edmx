@@ -1,0 +1,674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DAL.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Settings" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Newsletter_Send">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsletterId" Type="int" Nullable="false" />
+          <Property Name="SendDate" Type="datetime" Nullable="false" />
+          <Property Name="UserSendId" Type="int" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="NewsletterContent" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NewsletterName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="NewsletterSendGUID" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Newsletter_Send_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsletterSendId" Type="int" Nullable="false" />
+          <Property Name="SendToUserId" Type="int" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="SendDate" Type="datetime" Nullable="false" />
+          <Property Name="ReadDate" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="NewsletterSendItemGUID" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SendToContactId" Type="int" />
+          <Property Name="HasUnsubscribed" Type="bit" Nullable="false" />
+          <Property Name="SendType" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Newsletters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Account__ClubId__7F16D496">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__ClubI__42CCE065">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletter_Send">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__ClubI__4E3E9311">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Newsletters" Type="Self.Newsletters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletters">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__Creat__5026DB83">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Newsletters" Type="Self.Newsletters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Newsletters">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__Newsl__44B528D7">
+          <End Role="Newsletters" Type="Self.Newsletters" Multiplicity="1" />
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Newsletters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletter_Send">
+              <PropertyRef Name="NewsletterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__Newsl__4885B9BB">
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="1" />
+          <End Role="Newsletter_Send_Item" Type="Self.Newsletter_Send_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Newsletter_Send">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletter_Send_Item">
+              <PropertyRef Name="NewsletterSendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__SendT__4A6E022D">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Newsletter_Send_Item" Type="Self.Newsletter_Send_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Newsletter_Send_Item">
+              <PropertyRef Name="SendToUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__UserS__469D7149">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Newsletter_Send">
+              <PropertyRef Name="UserSendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetNewsletterStatsByNewsletterId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NewsletterId" Type="int" Mode="In" />
+          <Parameter Name="ClubId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="DALStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Newsletter_Send" EntityType="Self.Newsletter_Send" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Newsletter_Send_Item" EntityType="Self.Newsletter_Send_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Newsletters" EntityType="Self.Newsletters" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account__ClubId__7F16D496" Association="Self.FK__Account__ClubId__7F16D496">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__ClubI__42CCE065" Association="Self.FK__Newslette__ClubI__42CCE065">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__ClubI__4E3E9311" Association="Self.FK__Newslette__ClubI__4E3E9311">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Newsletters" EntitySet="Newsletters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__Creat__5026DB83" Association="Self.FK__Newslette__Creat__5026DB83">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Newsletters" EntitySet="Newsletters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__Newsl__44B528D7" Association="Self.FK__Newslette__Newsl__44B528D7">
+            <End Role="Newsletters" EntitySet="Newsletters" />
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__Newsl__4885B9BB" Association="Self.FK__Newslette__Newsl__4885B9BB">
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+            <End Role="Newsletter_Send_Item" EntitySet="Newsletter_Send_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__SendT__4A6E022D" Association="Self.FK__Newslette__SendT__4A6E022D">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Newsletter_Send_Item" EntitySet="Newsletter_Send_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__UserS__469D7149" Association="Self.FK__Newslette__UserS__469D7149">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DAL" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__Account__ClubId__7F16D496" FromRole="Account" ToRole="Club" />
+          <NavigationProperty Name="Newsletters" Relationship="Self.FK__Newslette__Creat__5026DB83" FromRole="Account" ToRole="Newsletters" />
+          <NavigationProperty Name="Newsletter_Send_Item" Relationship="Self.FK__Newslette__SendT__4A6E022D" FromRole="Account" ToRole="Newsletter_Send_Item" />
+          <NavigationProperty Name="Newsletter_Send" Relationship="Self.FK__Newslette__UserS__469D7149" FromRole="Account" ToRole="Newsletter_Send" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Settings" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Account__ClubId__7F16D496" FromRole="Club" ToRole="Account" />
+          <NavigationProperty Name="Newsletter_Send" Relationship="Self.FK__Newslette__ClubI__42CCE065" FromRole="Club" ToRole="Newsletter_Send" />
+          <NavigationProperty Name="Newsletters" Relationship="Self.FK__Newslette__ClubI__4E3E9311" FromRole="Club" ToRole="Newsletters" />
+        </EntityType>
+        <EntityType Name="Newsletter_Send">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsletterId" Type="Int32" Nullable="false" />
+          <Property Name="SendDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserSendId" Type="Int32" Nullable="false" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="NewsletterContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NewsletterName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NewsletterSendGUID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Newslette__UserS__469D7149" FromRole="Newsletter_Send" ToRole="Account" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__Newslette__ClubI__42CCE065" FromRole="Newsletter_Send" ToRole="Club" />
+          <NavigationProperty Name="Newsletters" Relationship="Self.FK__Newslette__Newsl__44B528D7" FromRole="Newsletter_Send" ToRole="Newsletters" />
+          <NavigationProperty Name="Newsletter_Send_Item" Relationship="Self.FK__Newslette__Newsl__4885B9BB" FromRole="Newsletter_Send" ToRole="Newsletter_Send_Item" />
+        </EntityType>
+        <EntityType Name="Newsletter_Send_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsletterSendId" Type="Int32" Nullable="false" />
+          <Property Name="SendToUserId" Type="Int32" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="SendDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NewsletterSendItemGUID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SendToContactId" Type="Int32" />
+          <Property Name="HasUnsubscribed" Type="Boolean" Nullable="false" />
+          <Property Name="SendType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Newslette__SendT__4A6E022D" FromRole="Newsletter_Send_Item" ToRole="Account" />
+          <NavigationProperty Name="Newsletter_Send" Relationship="Self.FK__Newslette__Newsl__4885B9BB" FromRole="Newsletter_Send_Item" ToRole="Newsletter_Send" />
+        </EntityType>
+        <EntityType Name="Newsletters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Newslette__Creat__5026DB83" FromRole="Newsletters" ToRole="Account" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__Newslette__ClubI__4E3E9311" FromRole="Newsletters" ToRole="Club" />
+          <NavigationProperty Name="Newsletter_Send" Relationship="Self.FK__Newslette__Newsl__44B528D7" FromRole="Newsletters" ToRole="Newsletter_Send" />
+        </EntityType>
+        <Association Name="FK__Account__ClubId__7F16D496">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__Creat__5026DB83">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Newsletters" Type="Self.Newsletters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Newsletters">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__Creat__511AFFBC">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Newsletters" Type="Self.Newsletters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Newsletters">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__SendT__4A6E022D">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Newsletter_Send_Item" Type="Self.Newsletter_Send_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Newsletter_Send_Item">
+              <PropertyRef Name="SendToUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__SendT__4C564A9F">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Newsletter_Send_Item" Type="Self.Newsletter_Send_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Newsletter_Send_Item">
+              <PropertyRef Name="SendToUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__UserS__469D7149">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Newsletter_Send">
+              <PropertyRef Name="UserSendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__UserS__47919582">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Newsletter_Send">
+              <PropertyRef Name="UserSendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__ClubI__42CCE065">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletter_Send">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__ClubI__43C1049E">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletter_Send">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__ClubI__4E3E9311">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Newsletters" Type="Self.Newsletters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletters">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__ClubI__4F32B74A">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Newsletters" Type="Self.Newsletters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletters">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__Newsl__44B528D7">
+          <End Role="Newsletters" Type="Self.Newsletters" Multiplicity="1" />
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Newsletters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletter_Send">
+              <PropertyRef Name="NewsletterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__Newsl__45A94D10">
+          <End Role="Newsletters" Type="Self.Newsletters" Multiplicity="1" />
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Newsletters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletter_Send">
+              <PropertyRef Name="NewsletterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__Newsl__4885B9BB">
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="1" />
+          <End Role="Newsletter_Send_Item" Type="Self.Newsletter_Send_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Newsletter_Send">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletter_Send_Item">
+              <PropertyRef Name="NewsletterSendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Newslette__Newsl__4979DDF4">
+          <End Role="Newsletter_Send" Type="Self.Newsletter_Send" Multiplicity="1" />
+          <End Role="Newsletter_Send_Item" Type="Self.Newsletter_Send_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Newsletter_Send">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Newsletter_Send_Item">
+              <PropertyRef Name="NewsletterSendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Vicdude_NewsletterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="Club" EntityType="Self.Club" />
+          <EntitySet Name="Newsletter_Send" EntityType="Self.Newsletter_Send" />
+          <EntitySet Name="Newsletter_Send_Item" EntityType="Self.Newsletter_Send_Item" />
+          <EntitySet Name="Newsletters" EntityType="Self.Newsletters" />
+          <AssociationSet Name="FK__Account__ClubId__7F16D496" Association="Self.FK__Account__ClubId__7F16D496">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__Creat__5026DB83" Association="Self.FK__Newslette__Creat__5026DB83">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Newsletters" EntitySet="Newsletters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__Creat__511AFFBC" Association="Self.FK__Newslette__Creat__511AFFBC">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Newsletters" EntitySet="Newsletters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__SendT__4A6E022D" Association="Self.FK__Newslette__SendT__4A6E022D">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Newsletter_Send_Item" EntitySet="Newsletter_Send_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__SendT__4C564A9F" Association="Self.FK__Newslette__SendT__4C564A9F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Newsletter_Send_Item" EntitySet="Newsletter_Send_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__UserS__469D7149" Association="Self.FK__Newslette__UserS__469D7149">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__UserS__47919582" Association="Self.FK__Newslette__UserS__47919582">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__ClubI__42CCE065" Association="Self.FK__Newslette__ClubI__42CCE065">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__ClubI__43C1049E" Association="Self.FK__Newslette__ClubI__43C1049E">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__ClubI__4E3E9311" Association="Self.FK__Newslette__ClubI__4E3E9311">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Newsletters" EntitySet="Newsletters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__ClubI__4F32B74A" Association="Self.FK__Newslette__ClubI__4F32B74A">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Newsletters" EntitySet="Newsletters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__Newsl__44B528D7" Association="Self.FK__Newslette__Newsl__44B528D7">
+            <End Role="Newsletters" EntitySet="Newsletters" />
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__Newsl__45A94D10" Association="Self.FK__Newslette__Newsl__45A94D10">
+            <End Role="Newsletters" EntitySet="Newsletters" />
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__Newsl__4885B9BB" Association="Self.FK__Newslette__Newsl__4885B9BB">
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+            <End Role="Newsletter_Send_Item" EntitySet="Newsletter_Send_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Newslette__Newsl__4979DDF4" Association="Self.FK__Newslette__Newsl__4979DDF4">
+            <End Role="Newsletter_Send" EntitySet="Newsletter_Send" />
+            <End Role="Newsletter_Send_Item" EntitySet="Newsletter_Send_Item" />
+          </AssociationSet>
+          <FunctionImport Name="GetNewsletterStatsByNewsletterId" ReturnType="Collection(DAL.GetNewsletterStatsByNewsletterId_Result)">
+            <Parameter Name="NewsletterId" Mode="In" Type="Int32" />
+            <Parameter Name="ClubId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetNewsletterStatsByNewsletterId_Result">
+          <Property Type="Boolean" Name="IsSent" Nullable="false" />
+          <Property Type="Boolean" Name="IsRead" Nullable="false" />
+          <Property Type="DateTime" Name="SendDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ReadDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="FirstName" Nullable="true" />
+          <Property Type="String" Name="LastName" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DALStoreContainer" CdmEntityContainer="Vicdude_NewsletterEntities">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="DAL.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Club">
+            <EntityTypeMapping TypeName="DAL.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Settings" ColumnName="Settings" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Newsletter_Send">
+            <EntityTypeMapping TypeName="DAL.Newsletter_Send">
+              <MappingFragment StoreEntitySet="Newsletter_Send">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NewsletterId" ColumnName="NewsletterId" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="UserSendId" ColumnName="UserSendId" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="NewsletterContent" ColumnName="NewsletterContent" />
+                <ScalarProperty Name="NewsletterName" ColumnName="NewsletterName" />
+                <ScalarProperty Name="NewsletterSendGUID" ColumnName="NewsletterSendGUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Newsletter_Send_Item">
+            <EntityTypeMapping TypeName="DAL.Newsletter_Send_Item">
+              <MappingFragment StoreEntitySet="Newsletter_Send_Item">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NewsletterSendId" ColumnName="NewsletterSendId" />
+                <ScalarProperty Name="SendToUserId" ColumnName="SendToUserId" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="ReadDate" ColumnName="ReadDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NewsletterSendItemGUID" ColumnName="NewsletterSendItemGUID" />
+                <ScalarProperty Name="SendToContactId" ColumnName="SendToContactId" />
+                <ScalarProperty Name="HasUnsubscribed" ColumnName="HasUnsubscribed" />
+                <ScalarProperty Name="SendType" ColumnName="SendType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Newsletters">
+            <EntityTypeMapping TypeName="DAL.Newsletters">
+              <MappingFragment StoreEntitySet="Newsletters">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetNewsletterStatsByNewsletterId" FunctionName="DAL.Store.GetNewsletterStatsByNewsletterId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DAL.GetNewsletterStatsByNewsletterId_Result">
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="ReadDate" ColumnName="ReadDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

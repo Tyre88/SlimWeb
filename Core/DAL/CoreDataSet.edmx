@@ -1,0 +1,1942 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DAL.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accessright">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accessright_Right">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccessrightId" Type="int" Nullable="false" />
+          <Property Name="AccessType" Type="int" Nullable="false" />
+          <Property Name="AccessTypeRight" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Account_Information">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Occupation" Type="nvarchar(max)" />
+          <Property Name="Street" Type="nvarchar" MaxLength="500" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Grade" Type="int" Nullable="false" />
+          <Property Name="Birthday" Type="datetime" Nullable="false" />
+          <Property Name="Weight" Type="nvarchar" MaxLength="500" />
+          <Property Name="Theme" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Account_Information_Generic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Account_Information_Generic_Value">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountInformationGenericId" Type="int" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Account_Session">
+          <Key>
+            <PropertyRef Name="Token" />
+          </Key>
+          <Property Name="Token" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="LoginDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="AccessID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Settings" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubLinkModule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsUnsubscribed" Type="bit" Nullable="false" />
+          <Property Name="UnsubscribeDate" Type="datetime" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GenericFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileType" Type="int" Nullable="false" />
+          <Property Name="ModuleType" Type="int" Nullable="false" />
+          <Property Name="ObjectId" Type="int" Nullable="false" />
+          <Property Name="Path" Type="nvarchar" MaxLength="500" />
+          <Property Name="FileExtension" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GenericItemPermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="ObjectType" Type="int" Nullable="false" />
+          <Property Name="ObjectId" Type="int" Nullable="false" />
+          <Property Name="AccessrightId" Type="int" />
+          <Property Name="AccountId" Type="int" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="GradingBookletId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tec_id" Type="int" Nullable="false" />
+          <Property Name="img" Type="image" />
+          <Property Name="url" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="LoginLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="AccessTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="Sref" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="AccessType" Type="int" Nullable="false" />
+          <Property Name="AccessTypeRight" Type="int" Nullable="false" />
+          <Property Name="IsAdminLink" Type="bit" Nullable="false" />
+          <Property Name="SpecificClubId" Type="int" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tec_id" Type="int" Nullable="false" />
+          <Property Name="url" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Search">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="query" Type="nvarchar" MaxLength="150" />
+          <Property Name="hitsTec" Type="int" />
+          <Property Name="hitsWord" Type="int" />
+          <Property Name="ip" Type="nvarchar" MaxLength="50" />
+          <Property Name="date" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TECHNICS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="desc" Type="nvarchar" MaxLength="4000" />
+          <Property Name="belt" Type="nvarchar" MaxLength="50" />
+          <Property Name="type_id" Type="int" />
+        </EntityType>
+        <Association Name="Accessright-&gt;AccountAccess">
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountAccess" Type="Self.AccountAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessright">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountAccess">
+              <PropertyRef Name="AccessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account-&gt;AccountAccess">
+          <End Role="Account" Type="Self.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountAccess" Type="Self.AccountAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountAccess">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessrig__Acces__7A521F79">
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="1" />
+          <End Role="Accessright_Right" Type="Self.Accessright_Right" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessright">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accessright_Right">
+              <PropertyRef Name="AccessrightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessrig__Acces__7B4643B2">
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="1" />
+          <End Role="Accessright_Right" Type="Self.Accessright_Right" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessright">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accessright_Right">
+              <PropertyRef Name="AccessrightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessrig__ClubI__7869D707">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accessright">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessrig__ClubI__795DFB40">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accessright">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__ClubId__7F16D496">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__02E7657A">
+          <End Role="Account_Information_Generic" Type="Self.Account_Information_Generic" Multiplicity="1" />
+          <End Role="Account_Information_Generic_Value" Type="Self.Account_Information_Generic_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Information_Generic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account_Information_Generic_Value">
+              <PropertyRef Name="AccountInformationGenericId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__03DB89B3">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Information_Generic_Value" Type="Self.Account_Information_Generic_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Information_Generic_Value">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__04CFADEC">
+          <End Role="Account_Information_Generic" Type="Self.Account_Information_Generic" Multiplicity="1" />
+          <End Role="Account_Information_Generic_Value" Type="Self.Account_Information_Generic_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Information_Generic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account_Information_Generic_Value">
+              <PropertyRef Name="AccountInformationGenericId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__05C3D225">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Information_Generic_Value" Type="Self.Account_Information_Generic_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Information_Generic_Value">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__37A5467C">
+          <End Role="Account" Type="Self.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Account_Information" Type="Self.Account_Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Information">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_S__Accou__5165187F">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Session" Type="Self.Account_Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Session">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClubLinkM__ClubI__0A888742">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="ClubLinkModule" Type="Self.ClubLinkModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubLinkModule">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClubLinkM__ClubI__0B7CAB7B">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="ClubLinkModule" Type="Self.ClubLinkModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubLinkModule">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClubLinkM__Modul__0C70CFB4">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ClubLinkModule" Type="Self.ClubLinkModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubLinkModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClubLinkM__Modul__0D64F3ED">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ClubLinkModule" Type="Self.ClubLinkModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubLinkModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contact__ClubId__1F83A428">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contact__ClubId__2077C861">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GenericIt__Acces__086B34A6">
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="0..1" />
+          <End Role="GenericItemPermission" Type="Self.GenericItemPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessright">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GenericItemPermission">
+              <PropertyRef Name="AccessrightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GenericIt__Accou__095F58DF">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="GenericItemPermission" Type="Self.GenericItemPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GenericItemPermission">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GenericIt__ClubI__0777106D">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="GenericItemPermission" Type="Self.GenericItemPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GenericItemPermission">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grade__ClubId__2FBA0BF1">
+          <End Role="Club" Type="Self.Club" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginLog__ClubId__3C1FE2D6">
+          <End Role="Club" Type="Self.Club" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoginLog" Type="Self.LoginLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginLog">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginLog__UserId__3D14070F">
+          <End Role="Account" Type="Self.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoginLog" Type="Self.LoginLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleLin__Modul__3E082B48">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleLink" Type="Self.ModuleLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleLink">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleLin__Modul__3EFC4F81">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleLink" Type="Self.ModuleLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleLink">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleLin__Speci__3FF073BA">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="ModuleLink" Type="Self.ModuleLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleLink">
+              <PropertyRef Name="SpecificClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleLin__Speci__40E497F3">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="ModuleLink" Type="Self.ModuleLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleLink">
+              <PropertyRef Name="SpecificClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tec-&gt;Img">
+          <End Role="TECHNICS" Type="Self.TECHNICS" Multiplicity="1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECHNICS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="tec_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tec-&gt;Movie">
+          <End Role="TECHNICS" Type="Self.TECHNICS" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECHNICS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="tec_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetActiveAccountSessions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DALStoreContainer">
+          <EntitySet Name="Accessright" EntityType="Self.Accessright" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accessright_Right" EntityType="Self.Accessright_Right" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account_Information" EntityType="Self.Account_Information" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account_Information_Generic" EntityType="Self.Account_Information_Generic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account_Information_Generic_Value" EntityType="Self.Account_Information_Generic_Value" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account_Session" EntityType="Self.Account_Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountAccess" EntityType="Self.AccountAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubLinkModule" EntityType="Self.ClubLinkModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GenericFile" EntityType="Self.GenericFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GenericItemPermission" EntityType="Self.GenericItemPermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginLog" EntityType="Self.LoginLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleLink" EntityType="Self.ModuleLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Search" EntityType="Self.Search" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TECHNICS" EntityType="Self.TECHNICS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Accessright-&gt;AccountAccess" Association="Self.Accessright-&gt;AccountAccess">
+            <End Role="Accessright" EntitySet="Accessright" />
+            <End Role="AccountAccess" EntitySet="AccountAccess" />
+          </AssociationSet>
+          <AssociationSet Name="Account-&gt;AccountAccess" Association="Self.Account-&gt;AccountAccess">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountAccess" EntitySet="AccountAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessrig__Acces__7A521F79" Association="Self.FK__Accessrig__Acces__7A521F79">
+            <End Role="Accessright" EntitySet="Accessright" />
+            <End Role="Accessright_Right" EntitySet="Accessright_Right" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessrig__Acces__7B4643B2" Association="Self.FK__Accessrig__Acces__7B4643B2">
+            <End Role="Accessright" EntitySet="Accessright" />
+            <End Role="Accessright_Right" EntitySet="Accessright_Right" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessrig__ClubI__7869D707" Association="Self.FK__Accessrig__ClubI__7869D707">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Accessright" EntitySet="Accessright" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessrig__ClubI__795DFB40" Association="Self.FK__Accessrig__ClubI__795DFB40">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Accessright" EntitySet="Accessright" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__ClubId__7F16D496" Association="Self.FK__Account__ClubId__7F16D496">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__02E7657A" Association="Self.FK__Account_I__Accou__02E7657A">
+            <End Role="Account_Information_Generic" EntitySet="Account_Information_Generic" />
+            <End Role="Account_Information_Generic_Value" EntitySet="Account_Information_Generic_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__03DB89B3" Association="Self.FK__Account_I__Accou__03DB89B3">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Information_Generic_Value" EntitySet="Account_Information_Generic_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__04CFADEC" Association="Self.FK__Account_I__Accou__04CFADEC">
+            <End Role="Account_Information_Generic" EntitySet="Account_Information_Generic" />
+            <End Role="Account_Information_Generic_Value" EntitySet="Account_Information_Generic_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__05C3D225" Association="Self.FK__Account_I__Accou__05C3D225">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Information_Generic_Value" EntitySet="Account_Information_Generic_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__37A5467C" Association="Self.FK__Account_I__Accou__37A5467C">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Information" EntitySet="Account_Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_S__Accou__5165187F" Association="Self.FK__Account_S__Accou__5165187F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Session" EntitySet="Account_Session" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClubLinkM__ClubI__0A888742" Association="Self.FK__ClubLinkM__ClubI__0A888742">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ClubLinkModule" EntitySet="ClubLinkModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClubLinkM__ClubI__0B7CAB7B" Association="Self.FK__ClubLinkM__ClubI__0B7CAB7B">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ClubLinkModule" EntitySet="ClubLinkModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClubLinkM__Modul__0C70CFB4" Association="Self.FK__ClubLinkM__Modul__0C70CFB4">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ClubLinkModule" EntitySet="ClubLinkModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClubLinkM__Modul__0D64F3ED" Association="Self.FK__ClubLinkM__Modul__0D64F3ED">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ClubLinkModule" EntitySet="ClubLinkModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contact__ClubId__1F83A428" Association="Self.FK__Contact__ClubId__1F83A428">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contact__ClubId__2077C861" Association="Self.FK__Contact__ClubId__2077C861">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GenericIt__Acces__086B34A6" Association="Self.FK__GenericIt__Acces__086B34A6">
+            <End Role="Accessright" EntitySet="Accessright" />
+            <End Role="GenericItemPermission" EntitySet="GenericItemPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GenericIt__Accou__095F58DF" Association="Self.FK__GenericIt__Accou__095F58DF">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="GenericItemPermission" EntitySet="GenericItemPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GenericIt__ClubI__0777106D" Association="Self.FK__GenericIt__ClubI__0777106D">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="GenericItemPermission" EntitySet="GenericItemPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grade__ClubId__2FBA0BF1" Association="Self.FK__Grade__ClubId__2FBA0BF1">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Grade" EntitySet="Grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginLog__ClubId__3C1FE2D6" Association="Self.FK__LoginLog__ClubId__3C1FE2D6">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="LoginLog" EntitySet="LoginLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginLog__UserId__3D14070F" Association="Self.FK__LoginLog__UserId__3D14070F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="LoginLog" EntitySet="LoginLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleLin__Modul__3E082B48" Association="Self.FK__ModuleLin__Modul__3E082B48">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleLink" EntitySet="ModuleLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleLin__Modul__3EFC4F81" Association="Self.FK__ModuleLin__Modul__3EFC4F81">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleLink" EntitySet="ModuleLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleLin__Speci__3FF073BA" Association="Self.FK__ModuleLin__Speci__3FF073BA">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ModuleLink" EntitySet="ModuleLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleLin__Speci__40E497F3" Association="Self.FK__ModuleLin__Speci__40E497F3">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ModuleLink" EntitySet="ModuleLink" />
+          </AssociationSet>
+          <AssociationSet Name="Tec-&gt;Img" Association="Self.Tec-&gt;Img">
+            <End Role="TECHNICS" EntitySet="TECHNICS" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="Tec-&gt;Movie" Association="Self.Tec-&gt;Movie">
+            <End Role="TECHNICS" EntitySet="TECHNICS" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DAL" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accessright">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountAccess" Relationship="Self.Accessright__AccountAccess" FromRole="Accessright" ToRole="AccountAccess" />
+          <NavigationProperty Name="Accessright_Right" Relationship="Self.FK__Accessrig__Acces__7A521F79" FromRole="Accessright" ToRole="Accessright_Right" />
+          <NavigationProperty Name="Accessright_Right1" Relationship="Self.FK__Accessrig__Acces__7B4643B2" FromRole="Accessright" ToRole="Accessright_Right" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__Accessrig__ClubI__7869D707" FromRole="Accessright" ToRole="Club" />
+          <NavigationProperty Name="Club1" Relationship="Self.FK__Accessrig__ClubI__795DFB40" FromRole="Accessright" ToRole="Club" />
+          <NavigationProperty Name="GenericItemPermission" Relationship="DAL.FK__GenericIt__Acces__086B34A6" FromRole="Accessright" ToRole="GenericItemPermission" />
+        </EntityType>
+        <EntityType Name="Accessright_Right">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccessrightId" Type="Int32" Nullable="false" />
+          <Property Name="AccessType" Type="Int32" Nullable="false" />
+          <Property Name="AccessTypeRight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accessright" Relationship="Self.FK__Accessrig__Acces__7A521F79" FromRole="Accessright_Right" ToRole="Accessright" />
+          <NavigationProperty Name="Accessright1" Relationship="Self.FK__Accessrig__Acces__7B4643B2" FromRole="Accessright_Right" ToRole="Accessright" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountAccess" Relationship="Self.Account__AccountAccess" FromRole="Account" ToRole="AccountAccess" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__Account__ClubId__000AF8CF" FromRole="Account" ToRole="Club" />
+          <NavigationProperty Name="Club1" Relationship="Self.FK__Account__ClubId__00FF1D08" FromRole="Account" ToRole="Club" />
+          <NavigationProperty Name="Club2" Relationship="Self.FK__Account__ClubId__7C3A67EB" FromRole="Account" ToRole="Club" />
+          <NavigationProperty Name="Club3" Relationship="Self.FK__Account__ClubId__7D2E8C24" FromRole="Account" ToRole="Club" />
+          <NavigationProperty Name="Club4" Relationship="Self.FK__Account__ClubId__7E22B05D" FromRole="Account" ToRole="Club" />
+          <NavigationProperty Name="Club5" Relationship="Self.FK__Account__ClubId__7F16D496" FromRole="Account" ToRole="Club" />
+          <NavigationProperty Name="Account_Information_Generic_Value" Relationship="Self.FK__Account_I__Accou__03DB89B3" FromRole="Account" ToRole="Account_Information_Generic_Value" />
+          <NavigationProperty Name="Account_Information_Generic_Value1" Relationship="Self.FK__Account_I__Accou__05C3D225" FromRole="Account" ToRole="Account_Information_Generic_Value" />
+          <NavigationProperty Name="Account_Information" Relationship="Self.FK__Account_I__Accou__37A5467C" FromRole="Account" ToRole="Account_Information" />
+          <NavigationProperty Name="Account_Session" Relationship="Self.FK__Account_S__Accou__5165187F" FromRole="Account" ToRole="Account_Session" />
+          <NavigationProperty Name="LoginLog" Relationship="Self.FK__LoginLog__UserId__3D14070F" FromRole="Account" ToRole="LoginLog" />
+          <NavigationProperty Name="GenericItemPermission" Relationship="DAL.FK__GenericIt__Accou__095F58DF" FromRole="Account" ToRole="GenericItemPermission" />
+        </EntityType>
+        <EntityType Name="Account_Information">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Occupation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Grade" Type="Int32" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Weight" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Theme" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Account_I__Accou__37A5467C" FromRole="Account_Information" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Account_Information_Generic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account_Information_Generic_Value" Relationship="Self.FK__Account_I__Accou__02E7657A" FromRole="Account_Information_Generic" ToRole="Account_Information_Generic_Value" />
+          <NavigationProperty Name="Account_Information_Generic_Value1" Relationship="Self.FK__Account_I__Accou__04CFADEC" FromRole="Account_Information_Generic" ToRole="Account_Information_Generic_Value" />
+        </EntityType>
+        <EntityType Name="Account_Information_Generic_Value">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountInformationGenericId" Type="Int32" Nullable="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Account_I__Accou__03DB89B3" FromRole="Account_Information_Generic_Value" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK__Account_I__Accou__05C3D225" FromRole="Account_Information_Generic_Value" ToRole="Account" />
+          <NavigationProperty Name="Account_Information_Generic" Relationship="Self.FK__Account_I__Accou__02E7657A" FromRole="Account_Information_Generic_Value" ToRole="Account_Information_Generic" />
+          <NavigationProperty Name="Account_Information_Generic1" Relationship="Self.FK__Account_I__Accou__04CFADEC" FromRole="Account_Information_Generic_Value" ToRole="Account_Information_Generic" />
+        </EntityType>
+        <EntityType Name="Account_Session">
+          <Key>
+            <PropertyRef Name="Token" />
+          </Key>
+          <Property Name="Token" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="LoginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Account_S__Accou__5165187F" FromRole="Account_Session" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="AccountAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="AccessID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accessright" Relationship="Self.Accessright__AccountAccess" FromRole="AccountAccess" ToRole="Accessright" />
+          <NavigationProperty Name="Account" Relationship="Self.Account__AccountAccess" FromRole="AccountAccess" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Settings" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accessright" Relationship="Self.FK__Accessrig__ClubI__7869D707" FromRole="Club" ToRole="Accessright" />
+          <NavigationProperty Name="Accessright1" Relationship="Self.FK__Accessrig__ClubI__795DFB40" FromRole="Club" ToRole="Accessright" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Account__ClubId__000AF8CF" FromRole="Club" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK__Account__ClubId__00FF1D08" FromRole="Club" ToRole="Account" />
+          <NavigationProperty Name="Account2" Relationship="Self.FK__Account__ClubId__7C3A67EB" FromRole="Club" ToRole="Account" />
+          <NavigationProperty Name="Account3" Relationship="Self.FK__Account__ClubId__7D2E8C24" FromRole="Club" ToRole="Account" />
+          <NavigationProperty Name="Account4" Relationship="Self.FK__Account__ClubId__7E22B05D" FromRole="Club" ToRole="Account" />
+          <NavigationProperty Name="Account5" Relationship="Self.FK__Account__ClubId__7F16D496" FromRole="Club" ToRole="Account" />
+          <NavigationProperty Name="ClubLinkModule" Relationship="Self.FK__ClubLinkM__ClubI__0A888742" FromRole="Club" ToRole="ClubLinkModule" />
+          <NavigationProperty Name="ClubLinkModule1" Relationship="Self.FK__ClubLinkM__ClubI__0B7CAB7B" FromRole="Club" ToRole="ClubLinkModule" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK__Contact__ClubId__1F83A428" FromRole="Club" ToRole="Contact" />
+          <NavigationProperty Name="Contact1" Relationship="Self.FK__Contact__ClubId__2077C861" FromRole="Club" ToRole="Contact" />
+          <NavigationProperty Name="Grade" Relationship="Self.FK__Grade__ClubId__2FBA0BF1" FromRole="Club" ToRole="Grade" />
+          <NavigationProperty Name="LoginLog" Relationship="Self.FK__LoginLog__ClubId__3C1FE2D6" FromRole="Club" ToRole="LoginLog" />
+          <NavigationProperty Name="ModuleLink" Relationship="Self.FK__ModuleLin__Speci__3FF073BA" FromRole="Club" ToRole="ModuleLink" />
+          <NavigationProperty Name="ModuleLink1" Relationship="Self.FK__ModuleLin__Speci__40E497F3" FromRole="Club" ToRole="ModuleLink" />
+          <NavigationProperty Name="GenericItemPermission" Relationship="DAL.FK__GenericIt__ClubI__0777106D" FromRole="Club" ToRole="GenericItemPermission" />
+        </EntityType>
+        <EntityType Name="ClubLinkModule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__ClubLinkM__ClubI__0A888742" FromRole="ClubLinkModule" ToRole="Club" />
+          <NavigationProperty Name="Club1" Relationship="Self.FK__ClubLinkM__ClubI__0B7CAB7B" FromRole="ClubLinkModule" ToRole="Club" />
+          <NavigationProperty Name="Module" Relationship="Self.FK__ClubLinkM__Modul__0C70CFB4" FromRole="ClubLinkModule" ToRole="Module" />
+          <NavigationProperty Name="Module1" Relationship="Self.FK__ClubLinkM__Modul__0D64F3ED" FromRole="ClubLinkModule" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsUnsubscribed" Type="Boolean" Nullable="false" />
+          <Property Name="UnsubscribeDate" Type="DateTime" Precision="3" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__Contact__ClubId__1F83A428" FromRole="Contact" ToRole="Club" />
+          <NavigationProperty Name="Club1" Relationship="Self.FK__Contact__ClubId__2077C861" FromRole="Contact" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="GenericFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileType" Type="Int32" Nullable="false" />
+          <Property Name="ModuleType" Type="Int32" Nullable="false" />
+          <Property Name="ObjectId" Type="Int32" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GradingBookletId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__Grade__ClubId__2FBA0BF1" FromRole="Grade" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tec_id" Type="Int32" Nullable="false" />
+          <Property Name="img" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="url" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TECHNICS" Relationship="Self.Tec__Img" FromRole="Image" ToRole="TECHNICS" />
+        </EntityType>
+        <EntityType Name="LoginLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__LoginLog__UserId__3D14070F" FromRole="LoginLog" ToRole="Account" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__LoginLog__ClubId__3C1FE2D6" FromRole="LoginLog" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccessTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClubLinkModule" Relationship="Self.FK__ClubLinkM__Modul__0C70CFB4" FromRole="Module" ToRole="ClubLinkModule" />
+          <NavigationProperty Name="ClubLinkModule1" Relationship="Self.FK__ClubLinkM__Modul__0D64F3ED" FromRole="Module" ToRole="ClubLinkModule" />
+          <NavigationProperty Name="ModuleLink" Relationship="Self.FK__ModuleLin__Modul__3E082B48" FromRole="Module" ToRole="ModuleLink" />
+          <NavigationProperty Name="ModuleLink1" Relationship="Self.FK__ModuleLin__Modul__3EFC4F81" FromRole="Module" ToRole="ModuleLink" />
+        </EntityType>
+        <EntityType Name="ModuleLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="Sref" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccessType" Type="Int32" Nullable="false" />
+          <Property Name="AccessTypeRight" Type="Int32" Nullable="false" />
+          <Property Name="IsAdminLink" Type="Boolean" Nullable="false" />
+          <Property Name="SpecificClubId" Type="Int32" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__ModuleLin__Speci__3FF073BA" FromRole="ModuleLink" ToRole="Club" />
+          <NavigationProperty Name="Club1" Relationship="Self.FK__ModuleLin__Speci__40E497F3" FromRole="ModuleLink" ToRole="Club" />
+          <NavigationProperty Name="Module" Relationship="Self.FK__ModuleLin__Modul__3E082B48" FromRole="ModuleLink" ToRole="Module" />
+          <NavigationProperty Name="Module1" Relationship="Self.FK__ModuleLin__Modul__3EFC4F81" FromRole="ModuleLink" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tec_id" Type="Int32" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TECHNICS" Relationship="Self.Tec__Movie" FromRole="Movie" ToRole="TECHNICS" />
+        </EntityType>
+        <EntityType Name="Search">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="query" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="hitsTec" Type="Int32" />
+          <Property Name="hitsWord" Type="Int32" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TECHNICS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="desc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="belt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="type_id" Type="Int32" />
+          <NavigationProperty Name="Image" Relationship="Self.Tec__Img" FromRole="TECHNICS" ToRole="Image" />
+          <NavigationProperty Name="Movie" Relationship="Self.Tec__Movie" FromRole="TECHNICS" ToRole="Movie" />
+        </EntityType>
+        <Association Name="Accessright__AccountAccess">
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountAccess" Type="Self.AccountAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessright">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountAccess">
+              <PropertyRef Name="AccessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessrig__Acces__7A521F79">
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="1" />
+          <End Role="Accessright_Right" Type="Self.Accessright_Right" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessright">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accessright_Right">
+              <PropertyRef Name="AccessrightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessrig__Acces__7B4643B2">
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="1" />
+          <End Role="Accessright_Right" Type="Self.Accessright_Right" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessright">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accessright_Right">
+              <PropertyRef Name="AccessrightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessrig__ClubI__7869D707">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accessright">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessrig__ClubI__795DFB40">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Accessright" Type="Self.Accessright" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accessright">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account__AccountAccess">
+          <End Role="Account" Type="Self.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountAccess" Type="Self.AccountAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountAccess">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__ClubId__000AF8CF">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__ClubId__00FF1D08">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__ClubId__7C3A67EB">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__ClubId__7D2E8C24">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__ClubId__7E22B05D">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__ClubId__7F16D496">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__03DB89B3">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Information_Generic_Value" Type="Self.Account_Information_Generic_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Information_Generic_Value">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__05C3D225">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Information_Generic_Value" Type="Self.Account_Information_Generic_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Information_Generic_Value">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__37A5467C">
+          <End Role="Account" Type="Self.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Account_Information" Type="Self.Account_Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Information">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_S__Accou__5165187F">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Session" Type="Self.Account_Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Session">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginLog__UserId__3D14070F">
+          <End Role="Account" Type="Self.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoginLog" Type="Self.LoginLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__02E7657A">
+          <End Role="Account_Information_Generic" Type="Self.Account_Information_Generic" Multiplicity="1" />
+          <End Role="Account_Information_Generic_Value" Type="Self.Account_Information_Generic_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Information_Generic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account_Information_Generic_Value">
+              <PropertyRef Name="AccountInformationGenericId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_I__Accou__04CFADEC">
+          <End Role="Account_Information_Generic" Type="Self.Account_Information_Generic" Multiplicity="1" />
+          <End Role="Account_Information_Generic_Value" Type="Self.Account_Information_Generic_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Information_Generic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account_Information_Generic_Value">
+              <PropertyRef Name="AccountInformationGenericId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClubLinkM__ClubI__0A888742">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="ClubLinkModule" Type="Self.ClubLinkModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubLinkModule">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClubLinkM__ClubI__0B7CAB7B">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="ClubLinkModule" Type="Self.ClubLinkModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubLinkModule">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contact__ClubId__1F83A428">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contact__ClubId__2077C861">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grade__ClubId__2FBA0BF1">
+          <End Role="Club" Type="Self.Club" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginLog__ClubId__3C1FE2D6">
+          <End Role="Club" Type="Self.Club" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoginLog" Type="Self.LoginLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginLog">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleLin__Speci__3FF073BA">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="ModuleLink" Type="Self.ModuleLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleLink">
+              <PropertyRef Name="SpecificClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleLin__Speci__40E497F3">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="ModuleLink" Type="Self.ModuleLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleLink">
+              <PropertyRef Name="SpecificClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClubLinkM__Modul__0C70CFB4">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ClubLinkModule" Type="Self.ClubLinkModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubLinkModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClubLinkM__Modul__0D64F3ED">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ClubLinkModule" Type="Self.ClubLinkModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubLinkModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tec__Img">
+          <End Role="TECHNICS" Type="Self.TECHNICS" Multiplicity="1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECHNICS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="tec_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleLin__Modul__3E082B48">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleLink" Type="Self.ModuleLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleLink">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleLin__Modul__3EFC4F81">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleLink" Type="Self.ModuleLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleLink">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tec__Movie">
+          <End Role="TECHNICS" Type="Self.TECHNICS" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECHNICS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="tec_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CoreModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accessright" EntityType="Self.Accessright" />
+          <EntitySet Name="Accessright_Right" EntityType="Self.Accessright_Right" />
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="Account_Information" EntityType="Self.Account_Information" />
+          <EntitySet Name="Account_Information_Generic" EntityType="Self.Account_Information_Generic" />
+          <EntitySet Name="Account_Information_Generic_Value" EntityType="Self.Account_Information_Generic_Value" />
+          <EntitySet Name="Account_Session" EntityType="Self.Account_Session" />
+          <EntitySet Name="AccountAccess" EntityType="Self.AccountAccess" />
+          <EntitySet Name="Club" EntityType="Self.Club" />
+          <EntitySet Name="ClubLinkModule" EntityType="Self.ClubLinkModule" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" />
+          <EntitySet Name="GenericFile" EntityType="Self.GenericFile" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" />
+          <EntitySet Name="Image" EntityType="Self.Image" />
+          <EntitySet Name="LoginLog" EntityType="Self.LoginLog" />
+          <EntitySet Name="Module" EntityType="Self.Module" />
+          <EntitySet Name="ModuleLink" EntityType="Self.ModuleLink" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" />
+          <EntitySet Name="Search" EntityType="Self.Search" />
+          <EntitySet Name="TECHNICS" EntityType="Self.TECHNICS" />
+          <AssociationSet Name="Accessright__AccountAccess" Association="Self.Accessright__AccountAccess">
+            <End Role="Accessright" EntitySet="Accessright" />
+            <End Role="AccountAccess" EntitySet="AccountAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessrig__Acces__7A521F79" Association="Self.FK__Accessrig__Acces__7A521F79">
+            <End Role="Accessright" EntitySet="Accessright" />
+            <End Role="Accessright_Right" EntitySet="Accessright_Right" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessrig__Acces__7B4643B2" Association="Self.FK__Accessrig__Acces__7B4643B2">
+            <End Role="Accessright" EntitySet="Accessright" />
+            <End Role="Accessright_Right" EntitySet="Accessright_Right" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessrig__ClubI__7869D707" Association="Self.FK__Accessrig__ClubI__7869D707">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Accessright" EntitySet="Accessright" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessrig__ClubI__795DFB40" Association="Self.FK__Accessrig__ClubI__795DFB40">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Accessright" EntitySet="Accessright" />
+          </AssociationSet>
+          <AssociationSet Name="Account__AccountAccess" Association="Self.Account__AccountAccess">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountAccess" EntitySet="AccountAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__ClubId__000AF8CF" Association="Self.FK__Account__ClubId__000AF8CF">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__ClubId__00FF1D08" Association="Self.FK__Account__ClubId__00FF1D08">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__ClubId__7C3A67EB" Association="Self.FK__Account__ClubId__7C3A67EB">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__ClubId__7D2E8C24" Association="Self.FK__Account__ClubId__7D2E8C24">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__ClubId__7E22B05D" Association="Self.FK__Account__ClubId__7E22B05D">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__ClubId__7F16D496" Association="Self.FK__Account__ClubId__7F16D496">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__03DB89B3" Association="Self.FK__Account_I__Accou__03DB89B3">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Information_Generic_Value" EntitySet="Account_Information_Generic_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__05C3D225" Association="Self.FK__Account_I__Accou__05C3D225">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Information_Generic_Value" EntitySet="Account_Information_Generic_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__37A5467C" Association="Self.FK__Account_I__Accou__37A5467C">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Information" EntitySet="Account_Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_S__Accou__5165187F" Association="Self.FK__Account_S__Accou__5165187F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Session" EntitySet="Account_Session" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginLog__UserId__3D14070F" Association="Self.FK__LoginLog__UserId__3D14070F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="LoginLog" EntitySet="LoginLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__02E7657A" Association="Self.FK__Account_I__Accou__02E7657A">
+            <End Role="Account_Information_Generic" EntitySet="Account_Information_Generic" />
+            <End Role="Account_Information_Generic_Value" EntitySet="Account_Information_Generic_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_I__Accou__04CFADEC" Association="Self.FK__Account_I__Accou__04CFADEC">
+            <End Role="Account_Information_Generic" EntitySet="Account_Information_Generic" />
+            <End Role="Account_Information_Generic_Value" EntitySet="Account_Information_Generic_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClubLinkM__ClubI__0A888742" Association="Self.FK__ClubLinkM__ClubI__0A888742">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ClubLinkModule" EntitySet="ClubLinkModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClubLinkM__ClubI__0B7CAB7B" Association="Self.FK__ClubLinkM__ClubI__0B7CAB7B">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ClubLinkModule" EntitySet="ClubLinkModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contact__ClubId__1F83A428" Association="Self.FK__Contact__ClubId__1F83A428">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contact__ClubId__2077C861" Association="Self.FK__Contact__ClubId__2077C861">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grade__ClubId__2FBA0BF1" Association="Self.FK__Grade__ClubId__2FBA0BF1">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Grade" EntitySet="Grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginLog__ClubId__3C1FE2D6" Association="Self.FK__LoginLog__ClubId__3C1FE2D6">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="LoginLog" EntitySet="LoginLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleLin__Speci__3FF073BA" Association="Self.FK__ModuleLin__Speci__3FF073BA">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ModuleLink" EntitySet="ModuleLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleLin__Speci__40E497F3" Association="Self.FK__ModuleLin__Speci__40E497F3">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ModuleLink" EntitySet="ModuleLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClubLinkM__Modul__0C70CFB4" Association="Self.FK__ClubLinkM__Modul__0C70CFB4">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ClubLinkModule" EntitySet="ClubLinkModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClubLinkM__Modul__0D64F3ED" Association="Self.FK__ClubLinkM__Modul__0D64F3ED">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ClubLinkModule" EntitySet="ClubLinkModule" />
+          </AssociationSet>
+          <AssociationSet Name="Tec__Img" Association="Self.Tec__Img">
+            <End Role="TECHNICS" EntitySet="TECHNICS" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleLin__Modul__3E082B48" Association="Self.FK__ModuleLin__Modul__3E082B48">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleLink" EntitySet="ModuleLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleLin__Modul__3EFC4F81" Association="Self.FK__ModuleLin__Modul__3EFC4F81">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleLink" EntitySet="ModuleLink" />
+          </AssociationSet>
+          <AssociationSet Name="Tec__Movie" Association="Self.Tec__Movie">
+            <End Role="TECHNICS" EntitySet="TECHNICS" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <FunctionImport Name="GetActiveAccountSessions" ReturnType="Collection(DAL.GetActiveAccountSessions_Result)" />
+          <EntitySet Name="GenericItemPermission" EntityType="DAL.GenericItemPermission" />
+          <AssociationSet Name="FK__GenericIt__Acces__086B34A6" Association="DAL.FK__GenericIt__Acces__086B34A6">
+            <End Role="Accessright" EntitySet="Accessright" />
+            <End Role="GenericItemPermission" EntitySet="GenericItemPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GenericIt__Accou__095F58DF" Association="DAL.FK__GenericIt__Accou__095F58DF">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="GenericItemPermission" EntitySet="GenericItemPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GenericIt__ClubI__0777106D" Association="DAL.FK__GenericIt__ClubI__0777106D">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="GenericItemPermission" EntitySet="GenericItemPermission" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="GetActiveAccountSessions_Result">
+          <Property Type="String" Name="Token" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="AccountId" Nullable="false" />
+          <Property Type="DateTime" Name="LoginDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ExpirationDate" Nullable="false" Precision="23" />
+        </ComplexType>
+        <EntityType Name="GenericItemPermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="ObjectType" Type="Int32" Nullable="false" />
+          <Property Name="ObjectId" Type="Int32" Nullable="false" />
+          <Property Name="AccessrightId" Type="Int32" />
+          <Property Name="AccountId" Type="Int32" />
+          <NavigationProperty Name="Accessright" Relationship="DAL.FK__GenericIt__Acces__086B34A6" FromRole="GenericItemPermission" ToRole="Accessright" />
+          <NavigationProperty Name="Account" Relationship="DAL.FK__GenericIt__Accou__095F58DF" FromRole="GenericItemPermission" ToRole="Account" />
+          <NavigationProperty Name="Club" Relationship="DAL.FK__GenericIt__ClubI__0777106D" FromRole="GenericItemPermission" ToRole="Club" />
+        </EntityType>
+        <Association Name="FK__GenericIt__Acces__086B34A6">
+          <End Type="DAL.Accessright" Role="Accessright" Multiplicity="0..1" />
+          <End Type="DAL.GenericItemPermission" Role="GenericItemPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessright">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GenericItemPermission">
+              <PropertyRef Name="AccessrightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GenericIt__Accou__095F58DF">
+          <End Type="DAL.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="DAL.GenericItemPermission" Role="GenericItemPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GenericItemPermission">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GenericIt__ClubI__0777106D">
+          <End Type="DAL.Club" Role="Club" Multiplicity="1" />
+          <End Type="DAL.GenericItemPermission" Role="GenericItemPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GenericItemPermission">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DALStoreContainer" CdmEntityContainer="CoreModel">
+          <EntitySetMapping Name="Accessright">
+            <EntityTypeMapping TypeName="DAL.Accessright">
+              <MappingFragment StoreEntitySet="Accessright">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accessright_Right">
+            <EntityTypeMapping TypeName="DAL.Accessright_Right">
+              <MappingFragment StoreEntitySet="Accessright_Right">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccessrightId" ColumnName="AccessrightId" />
+                <ScalarProperty Name="AccessType" ColumnName="AccessType" />
+                <ScalarProperty Name="AccessTypeRight" ColumnName="AccessTypeRight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="DAL.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_Information">
+            <EntityTypeMapping TypeName="DAL.Account_Information">
+              <MappingFragment StoreEntitySet="Account_Information">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Theme" ColumnName="Theme" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_Information_Generic">
+            <EntityTypeMapping TypeName="DAL.Account_Information_Generic">
+              <MappingFragment StoreEntitySet="Account_Information_Generic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_Information_Generic_Value">
+            <EntityTypeMapping TypeName="DAL.Account_Information_Generic_Value">
+              <MappingFragment StoreEntitySet="Account_Information_Generic_Value">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountInformationGenericId" ColumnName="AccountInformationGenericId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_Session">
+            <EntityTypeMapping TypeName="DAL.Account_Session">
+              <MappingFragment StoreEntitySet="Account_Session">
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountAccess">
+            <EntityTypeMapping TypeName="DAL.AccountAccess">
+              <MappingFragment StoreEntitySet="AccountAccess">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="AccessID" ColumnName="AccessID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Club">
+            <EntityTypeMapping TypeName="DAL.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Settings" ColumnName="Settings" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClubLinkModule">
+            <EntityTypeMapping TypeName="DAL.ClubLinkModule">
+              <MappingFragment StoreEntitySet="ClubLinkModule">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contact">
+            <EntityTypeMapping TypeName="DAL.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsUnsubscribed" ColumnName="IsUnsubscribed" />
+                <ScalarProperty Name="UnsubscribeDate" ColumnName="UnsubscribeDate" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GenericFile">
+            <EntityTypeMapping TypeName="DAL.GenericFile">
+              <MappingFragment StoreEntitySet="GenericFile">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="ModuleType" ColumnName="ModuleType" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grade">
+            <EntityTypeMapping TypeName="DAL.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="GradingBookletId" ColumnName="GradingBookletId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Image">
+            <EntityTypeMapping TypeName="DAL.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tec_id" ColumnName="tec_id" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="url" ColumnName="url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginLog">
+            <EntityTypeMapping TypeName="DAL.LoginLog">
+              <MappingFragment StoreEntitySet="LoginLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Module">
+            <EntityTypeMapping TypeName="DAL.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AccessTypeId" ColumnName="AccessTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleLink">
+            <EntityTypeMapping TypeName="DAL.ModuleLink">
+              <MappingFragment StoreEntitySet="ModuleLink">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="Sref" ColumnName="Sref" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="AccessType" ColumnName="AccessType" />
+                <ScalarProperty Name="AccessTypeRight" ColumnName="AccessTypeRight" />
+                <ScalarProperty Name="IsAdminLink" ColumnName="IsAdminLink" />
+                <ScalarProperty Name="SpecificClubId" ColumnName="SpecificClubId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movie">
+            <EntityTypeMapping TypeName="DAL.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tec_id" ColumnName="tec_id" />
+                <ScalarProperty Name="url" ColumnName="url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Search">
+            <EntityTypeMapping TypeName="DAL.Search">
+              <MappingFragment StoreEntitySet="Search">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="query" ColumnName="query" />
+                <ScalarProperty Name="hitsTec" ColumnName="hitsTec" />
+                <ScalarProperty Name="hitsWord" ColumnName="hitsWord" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TECHNICS">
+            <EntityTypeMapping TypeName="DAL.TECHNICS">
+              <MappingFragment StoreEntitySet="TECHNICS">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+                <ScalarProperty Name="belt" ColumnName="belt" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetActiveAccountSessions" FunctionName="DAL.Store.GetActiveAccountSessions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DAL.GetActiveAccountSessions_Result">
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="GenericItemPermission">
+            <EntityTypeMapping TypeName="DAL.GenericItemPermission">
+              <MappingFragment StoreEntitySet="GenericItemPermission">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="AccessrightId" ColumnName="AccessrightId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="ObjectType" ColumnName="ObjectType" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

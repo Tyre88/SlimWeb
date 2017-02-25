@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0393145a8fde4921a196e6783f741987" Name="Diagram1">
+        <EntityTypeShape EntityType="DAL.Account" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Club" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Newsletter_Send" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Newsletter_Send_Item" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Newsletters" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="DAL.FK__Account__ClubId__7F16D496" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__Creat__5026DB83" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__Creat__511AFFBC" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__SendT__4A6E022D" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__SendT__4C564A9F" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__UserS__469D7149" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__UserS__47919582" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__ClubI__42CCE065" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__ClubI__43C1049E" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__ClubI__4E3E9311" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__ClubI__4F32B74A" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__Newsl__44B528D7" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__Newsl__45A94D10" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__Newsl__4885B9BB" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Newslette__Newsl__4979DDF4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
