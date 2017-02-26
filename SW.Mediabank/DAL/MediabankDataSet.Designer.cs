@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\IIS-Sites\SlimWeb\Gradera.Mediabank\DAL\MediabankDataSet.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\IIS-Sites\SlimWeb\SW.Mediabank\DAL\MediabankDataSet.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

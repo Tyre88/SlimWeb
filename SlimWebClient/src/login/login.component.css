@@ -1,0 +1,11 @@
+.login
+{
+    width: 400px;
+    border: solid 1px #DADADA;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+}

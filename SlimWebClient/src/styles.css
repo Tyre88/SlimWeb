@@ -1,6 +1,8 @@
 body
 {
     background-color: #F5F5F5;
+    padding: 0;
+    margin: 0;
 }
 
 .loading-wrapper
@@ -13,4 +15,48 @@ body
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.module-wrapper
+{
+    display: flex;
+    flex: .85;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-wrapper
+{
+    flex: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.sw-button
+{
+    margin: 5px 0;
+    padding: 10px 20px;
+    background-color: #24292e;
+    color: #FAFAFA;
+    cursor: pointer;
+    transition: background .35s ease;
+    border-radius: 5px;
+}
+
+.sw-button:hover
+{
+    background-color: #1a1d21;
+}
+
+.sw-input
+{
+    padding: 10px;
+    border: none;
+    margin: 5px 0;
+}
+
+.sw-input:focus
+{
+    outline: none;
 }

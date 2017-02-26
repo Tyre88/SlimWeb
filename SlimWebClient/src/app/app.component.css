@@ -1,0 +1,44 @@
+.container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.container header
+{
+    text-align: center;
+    background-color: #24292e;
+    color: #FAFAFA;
+}
+
+.container header > h1
+{
+    margin: 10px 0;
+}
+
+.body
+{
+    flex: 1;
+    display: flex;
+}
+
+.body > nav
+{
+    flex: .15;
+}
+
+.body > router-outlet
+{
+    flex: 0;
+}
+
+.container footer
+{
+    font-size: .8em;
+    text-align: right;
+    padding: 10px;
+    background-color: #24292e;
+    color: #FAFAFA;
+}
